@@ -66,8 +66,9 @@ public class Player : MonoBehaviour
         }
         else if(other.CompareTag("middleOfTheRoom") && !MySingleton.currentDirection.Equals("?"))
         {
-            print("at middle of Room");
+            
             this.amAtMiddleOfRoom = true;
+            MySingleton.currentDirection = "middle";
         }
     }
 
