@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Rigidbody rb = this.gameObject.GetComponent<Rigidbody>();
+        //Rigidbody rb = this.gameObject.GetComponent<Rigidbody>();
 
         //disable all exits when the scene first loads
         this.turnOffExits();
@@ -129,7 +129,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.UpArrow) && !this.amMoving)
+        if (Input.GetKeyUp(KeyCode.UpArrow) && !this.amMoving && MySingleton.theCurrentRoom.isOpenDoor("north"))
         {
             this.amMoving = true;
             this.turnOnExits();
@@ -137,7 +137,7 @@ public class Player : MonoBehaviour
             this.gameObject.transform.LookAt(this.northExit.transform.position);
         }
 
-        if (Input.GetKeyUp(KeyCode.DownArrow) && !this.amMoving)
+        if (Input.GetKeyUp(KeyCode.DownArrow) && !this.amMoving && MySingleton.theCurrentRoom.isOpenDoor("south"))
         {
             this.amMoving = true;
             this.turnOnExits();
@@ -145,7 +145,7 @@ public class Player : MonoBehaviour
             this.gameObject.transform.LookAt(this.southExit.transform.position);
         }
 
-        if (Input.GetKeyUp(KeyCode.LeftArrow) && !this.amMoving)
+        if (Input.GetKeyUp(KeyCode.LeftArrow) && !this.amMoving && MySingleton.theCurrentRoom.isOpenDoor("west"))
         {
             this.amMoving = true;
             this.turnOnExits();
@@ -153,7 +153,7 @@ public class Player : MonoBehaviour
             this.gameObject.transform.LookAt(this.westExit.transform.position);
         }
 
-        if (Input.GetKeyUp(KeyCode.RightArrow) && !this.amMoving)
+        if (Input.GetKeyUp(KeyCode.RightArrow) && !this.amMoving && MySingleton.theCurrentRoom.isOpenDoor("east"))
         {
             this.amMoving = true;
             this.turnOnExits();
