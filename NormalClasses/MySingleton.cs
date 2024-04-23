@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MySingleton
 {
+    public static int currentPellets = 10; //Set this back to ZERO for normal game play
     public static string currentDirection = "?";
     public static Player thePlayer;
     public static Dungeon theDungeon = MySingleton.generateDungeon();

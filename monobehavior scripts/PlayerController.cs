@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor.SceneManagement;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
+    public TextMeshPro pellet_TMP;
     public GameObject northExit;
     public GameObject southExit;
     public GameObject eastExit;
@@ -34,6 +36,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //set the current pellet count for the player
+        this.pellet_TMP.text = "" + MySingleton.currentPellets;
         //Rigidbody rb = this.gameObject.GetComponent<Rigidbody>();
 
         //disable all exits when the scene first loads
@@ -112,12 +116,23 @@ public class PlayerController : MonoBehaviour
         }
         else if(other.CompareTag("power-pellet"))
         {
-            other.gameObject.SetActive(false); //make pellet disappear
+            EditorSceneManager.LoadScene("FightScene");
+
+            other.gameObject.SetActive(false); //visually make pellet disappear
+
+            //programatically  make sure the pellet doesnt show up again
+            Room theCurrentRoom = MySingleton.thePlayer.getCurrentRoom();
+            theCurrentRoom.removePellet(other.GetComponent<pelletController>().direction); //this is our code to fix the pellet...add ; to end of this line for error to go away
+
+           
+
+
         }
         else if(other.CompareTag("middleOfTheRoom") && !MySingleton.currentDirection.Equals("?"))
         {
             //we have hit the middle of the room, so lets turn off the collider
             //until the next run of the scene to avoid additional collisions
+
             this.middleOfTheRoom.SetActive(false);
             this.turnOnExits();
 
